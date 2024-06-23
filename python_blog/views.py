@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.http import Http404
 
 CATEGORIES = {
-    1: "Вы на территории Python",
-    2: "Вы на территории Django",
+    1: "Чилл территории Python",
+    2: "Django, сложно, но можно!",
     3: "Flask, бегите, глупцы!",
 }
 
@@ -18,26 +18,22 @@ def category_detail(request, category_id) -> HttpResponse:
     category_str = CATEGORIES.get(category_id)
     if not category_str:
         raise Http404(f"Категория с id={category_id} не найдена")
-    return HttpResponse(f"<h1>{category_str}</h1><a href='/category/'>Назад</a>")
+    return HttpResponse(f"<h1>{category_str}</h1>")
 
 
-def index(request) -> HttpResponse:
+def blog_catalog(request) -> HttpResponse:
     """
     Представление для главной страницы.
     """
     return HttpResponse(
-        """<h1>Мой блог!</h1>
-        <a href="/category/">Категории</a>
+        """<h1>Тут будет блог.</h1>
         """
-    )  # вернет страницу с заголовком с этой надписью
+    )
 
 
-def category(request) -> HttpResponse:
+def category_list(request) -> HttpResponse:
     """
     Представление для категорий
     """
-    return HttpResponse(
-        """<ul><li>Python</li><li>Django</li><li>Flask</li></ul>
-        <a href="/">На главную</a>
-        """
-    )  # Вернет страницу со списком
+    categories = ", ".join([str(key) for key in CATEGORIES.keys()])
+    return HttpResponse(categories)
