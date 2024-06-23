@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import Http404
 
 CATEGORIES = {
     1: "Вы на территории Python",
@@ -15,6 +16,8 @@ def category_detail(request, category_id) -> HttpResponse:
     """
     category_id = int(category_id)
     category_str = CATEGORIES.get(category_id)
+    if not category_str:
+        raise Http404(f"Категория с id={category_id} не найдена")
     return HttpResponse(f"<h1>{category_str}</h1><a href='/category/'>Назад</a>")
 
 
