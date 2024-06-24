@@ -21,7 +21,7 @@ def category_detail(request, category_id) -> HttpResponse:
     return HttpResponse(f"<h1>{category_str}</h1>")
 
 
-def blog_catalog(request) -> HttpResponse:
+def index(request) -> HttpResponse:
     """
     Представление для главной страницы.
     """
@@ -31,7 +31,7 @@ def blog_catalog(request) -> HttpResponse:
     )
 
 
-def category_list(request) -> HttpResponse:
+def category(request) -> HttpResponse:
     """
     Представление для категорий
     """

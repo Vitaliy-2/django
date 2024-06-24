@@ -8,9 +8,9 @@ from python_blog import views
 
 urlpatterns = [
     # Добавим главную страницу
-    path("", views.blog_catalog),
+    path("", views.index),
     # Добавляем категории
-    path("category/", views.category_list),  # blog/category/
+    path("category/", views.category),  # blog/category/
     # Добавляем детальное представление категории с int конвертером
     path("category/<int:category_id>/", views.category_detail),  # blog/category/1/
 ]
