@@ -1,3 +1,4 @@
+from email import message
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
@@ -16,9 +17,10 @@ def category_detail(request, category_id) -> HttpResponse:
     """
     category_id = int(category_id)
     category_str = CATEGORIES.get(category_id)
+    context: dict[str, str | None] = {'message': category_str}
     if not category_str:
         raise Http404(f"Категория с id={category_id} не найдена")
-    return HttpResponse(f"<h1>{category_str}</h1>")
+    return render(request, 'python_blog/test_template.html', context=context)
 
 
 def index(request) -> HttpResponse:
