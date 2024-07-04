@@ -24,6 +24,7 @@
         stack - список технологий
         {% endcomment %}
         {% for developer in developers %}
+        {% if developer.is_active %}
         <li>
             <h3>{{ developer.name }}</h3>
             <p>Возраст: {{ developer.age }}</p>
@@ -34,6 +35,7 @@
                 {% endfor %}
             </ul>
         </li>
+        {% endif %}
         {% endfor %} 
     </ul>
 {% endblock  %}
