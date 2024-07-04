@@ -20,7 +20,9 @@ from django.urls import path, include
 from python_blog import views
 
 urlpatterns = [
-    # path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls),
     # Добавим пакетно pythom_blog.urls
     path("blog/", include("python_blog.urls")),
+    # Добавляем страницу about
+    path("about/", views.about),
 ]

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <p>{{ text }}</p>
+    <p>{{ stack_list }}</p>
+    <h2>Наши разработчики</h2>
+    <ul>
+        <li>{{ developer1.get_rus_info }}</li>
+        <li>{{ developer2.get_rus_info }}</li>
+    </ul>
+{% endblock  %}
