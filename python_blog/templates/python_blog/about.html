@@ -16,15 +16,14 @@
     {% endfor %}
     </ul>
     <h2>Наши разработчики</h2>
-    <ul>
         {% comment %} 
         developers - список содержащий словари с данными
         name - ключ содержащий имя
         age - ключ словаря с возрастом
         stack - список технологий
         {% endcomment %}
+    <ul>
         {% for developer in developers %}
-        {% if developer.is_active %}
         <li>
             <h3>{{ developer.name }}</h3>
             <p>Возраст: {{ developer.age }}</p>
@@ -35,6 +34,10 @@
                 {% endfor %}
             </ul>
         </li>
+        {% comment %} Проверка, является ли итерация последней.
+        Если да, делаем hr {% endcomment %}
+        {% if forloop.last%}
+        <hr>
         {% endif %}
         {% endfor %} 
     </ul>
