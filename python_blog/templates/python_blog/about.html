@@ -5,10 +5,35 @@
 {% block content %}
     <h1>{{ title }}</h1>
     <p>{{ text }}</p>
-    <p>{{ stack_list }}</p>
+    <p>Попробуем отрисовать это циклом: {{ stack_list }}</p>
+    {% comment %}
+    Объявили переменную item, которая будет принимать значения
+    из списка stack_list
+    {% endcomment %}
+    <ul>
+    {% for item in stack_list %}
+    <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
     <h2>Наши разработчики</h2>
     <ul>
-        <li>{{ developer1.get_rus_info }}</li>
-        <li>{{ developer2.get_rus_info }}</li>
+        {% comment %} 
+        developers - список содержащий словари с данными
+        name - ключ содержащий имя
+        age - ключ словаря с возрастом
+        stack - список технологий
+        {% endcomment %}
+        {% for developer in developers %}
+        <li>
+            <h3>{{ developer.name }}</h3>
+            <p>Возраст: {{ developer.age }}</p>
+            <p>Стек технологий:</p>
+            <ul>
+                {% for stack in developer.stack %}
+                <li>{{ stack }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %} 
     </ul>
 {% endblock  %}

@@ -57,8 +57,11 @@ about_data = {
     "title": "О нас",
     "text": "Мы - команда разработчиков",
     "stack_list": ["Python", "Dgango", "Flask"],
-    "developer1": Developer("Иван", ['Python', 'Django']),
-    "developer2": Developer("Алексей", ['Python', 'Flask']),
+    "developers": [
+        {"name": "Иван", "age": 25, "stack": ["Python", "Django"]},
+        {"name": "Анна", "age": 23, "stack": ["Python", "Flask"]},
+        {"name": "Петр", "age": 30, "stack": ["JS", "React", "Vue"]},
+    ]
 }
 
 
