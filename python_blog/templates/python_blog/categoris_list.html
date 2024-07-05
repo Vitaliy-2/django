@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+{% comment %} Сделаем ссылку на about {% endcomment %}
+{% comment %} <a href="/about/">About</a> {% endcomment %}
+<a href="{% url 'about' %}">About</a>
+<ul>
+    {% for category in categories %}
+    <li>
+        {{ category }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock  %}

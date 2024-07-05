@@ -24,5 +24,5 @@ urlpatterns = [
     # Добавим пакетно pythom_blog.urls
     path("blog/", include("python_blog.urls")),
     # Добавляем страницу about
-    path("about/", views.about),
+    path("about/", views.about, name="about"),
 ]

@@ -10,7 +10,7 @@ urlpatterns = [
     # Добавим главную страницу
     path("", views.index),
     # Добавляем категории
-    path("category/", views.category),  # blog/category/
+    path("category/", views.category, name='categoris'),  # blog/category/
     # Добавляем детальное представление категории с int конвертером
-    path("category/<int:category_id>/", views.category_detail),  # blog/category/1/
+    path("category/<int:category_id>/", views.category_detail, name='category'),  # blog/category/1/
 ]

@@ -33,12 +33,12 @@ def index(request) -> HttpResponse:
     )
 
 
-def category(request) -> HttpResponse:
+def category(request):
     """
     Представление для категорий
     """
-    categories = ", ".join([str(key) for key in CATEGORIES.keys()])
-    return HttpResponse(categories)
+    context = {"categories": CATEGORIES.values()}
+    return render(request, 'python_blog/categoris_list.html', context)
 
 
 class Developer:
