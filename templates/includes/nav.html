@@ -1,0 +1,21 @@
+{% comment %} 
+page_alias - переменная, которая содержит алиас текущей страницы.
+Чтобы сделать её "активной"
+Нужно передать это значение через контекст в шаблон!!!
+{% endcomment %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">ЛОГОТИП</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Переключатель навигации">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          {% for item in menu %}
+            <a class="nav-link {% if item.alias == page_alias %} active {% endif %}" href="{% url item.alias %}">{{ item.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</nav>

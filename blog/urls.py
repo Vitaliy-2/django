@@ -21,6 +21,7 @@ from python_blog import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", views.main, name='main'),
     # Добавим пакетно pythom_blog.urls
     path("blog/", include("python_blog.urls")),
     # Добавляем страницу about

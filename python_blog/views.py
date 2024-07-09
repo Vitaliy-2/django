@@ -1,4 +1,4 @@
-from email import message
+# from email import message
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
@@ -41,14 +41,11 @@ def category_detail(request, category_id) -> HttpResponse:
     return render(request, "python_blog/test_template.html", context=context)
 
 
-def index(request) -> HttpResponse:
+def main(request) -> HttpResponse:
     """
     Представление для главной страницы.
     """
-    return HttpResponse(
-        """<h1>Тут будет блог.</h1>
-        """
-    )
+    return render(request, 'main.html')
 
 
 def category(request):
