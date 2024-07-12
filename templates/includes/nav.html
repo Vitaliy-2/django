@@ -13,7 +13,7 @@ page_alias - переменная, которая содержит алиас т
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           {% for item in menu %}
-            <a class="nav-link {% if item.alias == page_alias %} active {% endif %}" href="{% url item.alias %}">{{ item.name }}</a>
+          <a class="nav-link {% if item.alias == page_alias %} active {% endif %}" href="{% url item.alias %}">{{ item.name }}</a>
           {% endfor %}
         </div>
       </div>
