@@ -1,3 +1,12 @@
+{% comment %} 
+Переменные базового шаблона:
+title - заголовок страницы (Значение по умолчанию: Python блог)
+nav - содержимое навигационной панели (Значение по умолчанию: шаблон includes/nav.html)
+content - содержимое основного контента страницы, обрамлен BS5 container-xl (Значение по умолчанию: пусто)
+footer - содержимое подвала страницы, обрамлен BS5 container-xl  и footer (Значение по умолчанию: текст с копирайтом)
+scripts - дополнительные скрипты (Значение по умолчанию: пусто) (Не обрамлены тегами <script>)
+
+{% endcomment %}
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -17,6 +26,11 @@
         rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous"
+    />
+    {% comment %} Подключил BS5 иконки {% endcomment %}
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
 
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
@@ -40,11 +54,11 @@
     </main>
 
     <footer>
-      {% block footer %}
       <div class="container-xl">
+      {% block footer %}
         <p class="text-center text-muted">&copy; 2024 Пайтон Блог</p>
-      </div>
       {% endblock %}
+      </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 

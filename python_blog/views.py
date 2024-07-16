@@ -35,17 +35,14 @@ CATEGORIES_2 = [
 menu = [
     {
         "name": "Главная",
-        "url": "/",
         "alias": "main"
     },
     {
         "name": "Блог",
-        "url": "/blog/",
         "alias": "blog"
     },
     {
         "name": "О проекте",
-        "url": "/about/",
         "alias": "about"
     }
 ]
@@ -106,20 +103,7 @@ posts = [
 ]
 
 
-def category_detail(request, category_id) -> HttpResponse:
-    """
-    Представление для детальной страницы категории.
-    blog/category/1/
-    """
-    category_id = int(category_id)
-    category_str = CATEGORIES.get(category_id)
-    context: dict[str, str | None] = {"message": category_str}
-    if not category_str:
-        raise Http404(f"Категория с id={category_id} не найдена")
-    return render(request, "python_blog/test_template.html", context=context)
-
-
-def main(request) -> HttpResponse:
+def index(request) -> HttpResponse:
     """
     Представление для главной страницы.
     """
@@ -128,7 +112,7 @@ def main(request) -> HttpResponse:
         "page_alias": "main",
         "title": "Главная страница"
     }
-    return render(request, 'main.html', context)
+    return render(request, 'index.html', context)
 
 
 def about(request):
@@ -144,17 +128,24 @@ def blog(request):
     context = {
         "menu": menu,
         "page_alias": "blog",
-        "title": "Блог",
         "posts": posts
     }
     return render(request, 'python_blog/blog.html', context)
 
 
-def category(request):
+def post_detail(request, slug):
     """
-    Представление для категорий
+    Функция - представление для отдельной статьи
+    Принимает объект запроса HttpRequest и slug статьи
+    Отображает статью с соответствующим slug
     """
-    context = {"categories": CATEGORIES_2}
-    return render(request, 'python_blog/categoris_list.html', context)
+    post = next((p for p in posts if p["slug"] == slug), None)
+    if post is None:
+        return HttpResponse("Статья не найдена", status=404)
 
-
+    context = {
+        "menu": menu,
+        "post": post,
+        "page_alias": "blog_catalog",
+    }
+    return render(request, "python_blog/post_detail.html", context)
