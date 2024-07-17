@@ -25,9 +25,9 @@
     </div>
     <div class="mt-4">
         <h5>Комментарии</h5>
-        {% comment %} {% for comment in post.comments %}
+        {% for comment in post.comments %}
             {% include "includes/comment_include.html" %}
-        {% endfor %} {% endcomment %}
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
