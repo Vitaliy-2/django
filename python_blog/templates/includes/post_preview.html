@@ -1,26 +1,22 @@
-{% comment %} Представляет собой краткое
-отображение поста в BS5
+{% comment %} Представляет собой краткое отображение поста в BS5{% endcomment %}
 
-Переменные:
-category
-tags
-slug
-title
-text
-author
-published_date
-{% endcomment %}
-
-
-<div class="card mb-3">
-    <div class="card-header">
-        <h5>{{ post.category }}</h5>
-    </div>
+<div class="card h-100 mt-3 mb-3">
     <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
-        <p class="card-text">{{ post.text|truncatewords:20 }}</p>
-        <p class="card-text"><small class="text-muted">{{ post.author }} | {{ post.published_date }}</small></p>
-        <p class="card-text">Комментариев: {{ post.comments|length }}</p>
-        <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">Читать подробнее</a>
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">{{ post.text|truncatewords:30 }}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <span class="me-3"><i class="bi bi-chat-dots"></i> {{ post.comments|length }}</span>
+          <span><i class="bi bi-calendar"></i> {{ post.published_date }}</span>
+        </div>
+        <div>
+          <a href="{% url 'post_detail' post.slug %}" class="btn btn-dark d-block d-md-none">
+              <i class="bi bi-arrow-right"></i>
+          </a>
+          <a href="{% url 'post_detail' post.slug %}" class="btn btn-dark d-none d-md-block">
+              Читать далее
+          </a>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
