@@ -1,16 +1,37 @@
 {% extends "base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}" />
+{% endblock  %}
 {% block title %}Блог{% endblock %}
 {% block content %}
-<h1>Это блог!</h1>
+<h1 class="mt-3">Это блог!</h1>
 <p>Здесь вы найдете много интересного и полезного!</p>
-{% comment %} Поисковая форма BS5 {% endcomment %}
-<form class="d-flex">
-    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Поиск</button>
+{% comment %} Поисковая форма BS5 с чекбоксами {% endcomment %}
+<form class="mb-5 mt-3">
+    <div class="input-group mb-3">
+        <input class="form-control" type="search" placeholder="Поиск" aria-label="Search" name="search">
+        <button class="btn btn-dark" type="submit">Поиск</button>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="search_in_title" id="searchInTitle">
+        <label class="form-check-label" for="searchInTitle">Заголовок</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="search_in_text" id="searchInText">
+        <label class="form-check-label" for="searchInText">Текст</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="search_in_tags" id="searchInTags">
+        <label class="form-check-label" for="searchInTags">Теги</label>
+    </div>
 </form>
-{% comment %} Отрисовка постов циклом
-Пост представляет post_preview.html {% endcomment %}
-{% for post in posts %}
-    {% include "includes/post_preview.html" %}
-{% endfor %}
+{% comment %} Отрисовка постов циклом {% endcomment %}
+<div class="row">
+    {% for post in posts %}
+        <div class="col-12 mb-4">
+            {% include "includes/post_preview.html" %}
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}
