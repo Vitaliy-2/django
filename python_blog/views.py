@@ -1,7 +1,8 @@
 # from email import message
+# from re import search
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.http import Http404
+
 
 CATEGORIES = {
     1: "Чилл территории Python",
@@ -105,7 +106,9 @@ posts = [
 
 def index(request) -> HttpResponse:
     """
-    Представление для главной страницы.
+    Функция - представление для главной страницы
+    Принимает объект запроса HttpRequest
+    Вносит контекст дополнительные данные.
     """
     context = {
         "menu": menu,
@@ -116,6 +119,9 @@ def index(request) -> HttpResponse:
 
 
 def about(request):
+    """
+    Вьюшка для страницы "О проекте"
+    """
     context = {
         "menu": menu,
         "page_alias": "about",
@@ -125,12 +131,58 @@ def about(request):
 
 
 def blog(request):
-    context = {
-        "menu": menu,
-        "page_alias": "blog",
-        "posts": posts
-    }
-    return render(request, 'python_blog/blog.html', context)
+    """
+    Вьюшка для страницы "Блог" с каталогом постов.
+    Обрабатываем поисковую форму, которая обрабатывается методом GET
+    И пробуем получить от туда ключи:
+        search
+        searchInTitle
+        searchInText
+        searchInTags
+    """
+    
+    if request.method == "GET":  # Проверка на гет-запрос
+        search = request.GET.get("search")
+        search_in_title = request.GET.get("searchInTitle")
+        search_in_text = request.GET.get("searchInText")
+        search_in_tags = request.GET.get("searchInTags")
+
+        posts_filtered = []
+
+        if search:
+            for post in posts:
+                # Если чекбоксы выключены, ищем только по тексту
+                # Если включен title, ищем по названию
+                # Если включен text, ищем по тексту
+                # Если включен tags, ищем по тегам
+
+                # Поиск по умолчанию
+                if not search_in_title and not search_in_text and not search_in_tags:
+                    if search.lower() in post["text"].lower():
+                        posts_filtered.append(post)
+                
+                # Поиск по названию
+                if search_in_title:
+                    if search.lower() in post["title"].lower():
+                        posts_filtered.append(post)
+                
+                # Поиск по тексту
+                if search_in_text:
+                    if search.lower() in post["text"].lower():
+                        posts_filtered.append(post)
+                
+                # Поиск по тегам
+                if search_in_tags:
+                    for tag in post["tags"]:
+                        if search.lower() in tag.lower():
+                            posts_filtered.append(post)
+      
+        context = {
+            "menu": menu,
+            "page_alias": "blog",
+            "posts": posts_filtered if posts_filtered else posts,
+        }
+        return render(request, 'python_blog/blog.html', context)
 
 
 def post_detail(request, slug):
