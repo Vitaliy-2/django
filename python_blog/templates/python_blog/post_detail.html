@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load markdown_to_html %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
 <div class="container mt-5">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text">{{ post.text }}</p>
+            <h5 class="card-title">{% markdown_to_html post.title %}</h5>
+            <p class="card-text">{% markdown_to_html post.text %}</p>
             <p class="card-text"><strong>Автор:</strong> {{ post.author|default:"Автор не известен" }}</p>
             <p class="card-text"><strong>Дата публикации:</strong> {{ post.published_date }}</p>
             <div class="d-flex justify-content-between align-items-center">
