@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block title %}Блог{% endblock %}
+
 {% block head %}
+{% comment %} Подключили стили для постов {% endcomment %}
 <link rel="stylesheet" href="{% static 'css/blog.css' %}" />
 {% endblock  %}
-{% block title %}Блог{% endblock %}
+
 {% block content %}
 <h1 class="mt-3">Это блог!</h1>
 <p>Здесь вы найдете много интересного и полезного!</p>

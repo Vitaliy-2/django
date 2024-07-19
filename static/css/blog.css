@@ -1,0 +1,35 @@
+/* Легкий эффект "всплытия" для карточек При наведении мыши. div.card Небольшое увеличение с анимацией
+Увеличение размера на 5% при наведении на карточку. */
+
+div.card:hover {
+    transform: scale(1.01);
+    transition: transform 1.5s;
+    /* Слабая тень */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Глобальный стиль для всех полей ввода */
+input:focus, textarea:focus, select:focus {
+    outline: none !important; /* Убрать стандартную обводку */
+    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25) !important; /* Серая обводка */
+    border-color: #6c757d !important; /* Серая обводка */
+}
+
+
+/* Стили для чекбоксов */
+input[type="checkbox"] {
+    accent-color: #343a40; /* Темный цвет для активного состояния */
+    border: 1px solid #6c757d; /* Серый бордер */
+}
+
+input[type="checkbox"]:checked {
+    background-color: #343a40; /* Темный цвет для активного состояния */
+    border-color: #495057; /* Темный бордер */
+    outline: none; /* Убрать голубую обводку */
+}
+
+input[type="checkbox"]:focus {
+    outline: none; /* Убрать голубую обводку */
+    box-shadow: none; /* Убрать тень */
+    border-color: #495057; /* Темный бордер для фокуса */
+}
