@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # другие приложения
+    'django_extensions',
     # Пользовательские приложения внизу!
     'python_blog', 
 ]
