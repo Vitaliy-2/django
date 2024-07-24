@@ -11,10 +11,10 @@
           <span><i class="bi bi-calendar"></i> {{ post.published_date }}</span>
         </div>
         <div>
-          <a href="{% url 'post_detail' post.slug %}" class="btn btn-dark d-block d-md-none">
+          <a href="{{ post.get_absolute_url }}" class="btn btn-dark d-block d-md-none">
               <i class="bi bi-arrow-right"></i>
           </a>
-          <a href="{% url 'post_detail' post.slug %}" class="btn btn-dark d-none d-md-block">
+          <a href="{{ post.get_absolute_url }}" class="btn btn-dark d-none d-md-block">
               Читать далее
           </a>
         </div>
