@@ -19,5 +19,15 @@
           </a>
         </div>
       </div>
+      <div>
+        {% if post.tags.all %}
+          <div class="tags">
+            {% for tag in post.tags.all %}
+            {% comment %} #TODO - ссылка на вьюшку тег детально {% endcomment %}
+              <span class="tag badge">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
     </div>
   </div>

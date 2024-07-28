@@ -15,5 +15,6 @@ urlpatterns = [
     # Маршрут для блога
     path("", views.blog, name="blog"),  # blog/
     # Маршрут с конвертером slug для отображения отдельной статьи
-    path('<slug:slug>/', views.post_detail, name='post_detail')
+    path('<slug:slug>/', views.post_detail, name='post_detail'),
+    # path('tag/<slug:slug>/', tag_detail, name='tag_detail'),
 ]
