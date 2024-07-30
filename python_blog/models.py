@@ -14,6 +14,13 @@ class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     # related_name - имя обратной связи. Это имя будет использоваться для обращения к связанным объектам
     # Например, если мы захотим получить все посты, связанные с тегом, мы можем использовать выражение tag.posts.all()
+    category = models.ForeignKey(
+        "Category",
+        on_delete=models.CASCADE,
+        related_name="posts",
+        null=True,
+        default=None,
+    )
     tags = models.ManyToManyField("Tag", related_name="posts")
     published_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
