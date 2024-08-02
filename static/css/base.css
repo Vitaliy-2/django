@@ -1,26 +1,33 @@
 body {
-    font-size: 1.25rem; /* Размер шрифта */
-  }
-  
-  a.btn {
-    font-size: 1.1rem; /* Размер шрифта для кнопок */
-  }
-  
-  /* Стили тегов */
-  span.tag {
-    background-color: #55606b; /* Темный цвет фона */
-    color: #fff; /* Белый цвет текста */
-    font-family: monospace;
-  }
-  
-  /* Стили для тегов при наведении плавно окрашиваются в темный цвет фона */
-  span.tag:hover {
-    background-color: #343a40; /* Темный цвет фона */
-    transition: background-color 1.9s; /* Плавное изменение цвета фона */
-  }
-  
-  /* Размер иконок и цвет */
-  span > i.bi {
-    font-size: 1.5rem;
-    color: #343a40;
-  }
+  font-size: 1.25rem; /* Размер шрифта */
+}
+
+a.btn {
+  font-size: 1.1rem; /* Размер шрифта для кнопок */
+}
+
+/* Стили тегов */
+span.tag {
+  background-color: #55606b; /* Темный цвет фона */
+  color: #fff; /* Белый цвет текста #fff */
+  font-family: monospace;
+}
+
+/* Стили для тегов при наведении плавно окрашиваются в темный цвет фона */
+span.tag:hover {
+  background-color: black; /* Темный цвет фона #343a40 */
+  transition: background-color 1.0s; /* Плавное изменение цвета фона */
+}
+
+/* Размер иконок и цвет #343a40 */
+span > i.bi {
+  font-size: 1.5rem;
+  color: #343a40;
+}
+
+/* Внутри  <span class="tag badge"> <a href=" ... сделать белым шрфит */
+span.tag > a {
+  color: #fff;
+  /* Выключить подчеркивание текста ссылок */
+  text-decoration: none;
+}

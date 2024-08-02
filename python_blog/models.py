@@ -70,11 +70,11 @@ class Category(models.Model):
         """
         return self.name
 
-    # def get_absolute_url(self) -> str:
-    #     """
-    #     Заглушка для метода get_absolute_url
-    #     """
-    #     return f'/blog/category/{self.slug}/'
+    def get_absolute_url(self) -> str:
+        """
+        Метод для получения абсолютного URL поста по категории
+        """
+        return f'/blog/category/{self.slug}/'
 
 
 class Tag(models.Model):
@@ -101,12 +101,12 @@ class Tag(models.Model):
         """
         return self.name
 
-    # def get_absolute_url(self) -> str:
-    #     """
-    #     Заглушка для метода get_absolute_url
-    #     """
+    def get_absolute_url(self) -> str:
+        """
+        Метод для получения абсолютного URL поста по тегу
+        """
 
-    #     return f'/tag/{self.slug}/'
+        return f'/blog/tag/{self.slug}/'
 
 
 class Comment(models.Model):
