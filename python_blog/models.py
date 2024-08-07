@@ -22,6 +22,7 @@ class Post(models.Model):
         default=None,
     )
     tags = models.ManyToManyField("Tag", related_name="posts")
+    views = models.PositiveIntegerField(default=0)
     published_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

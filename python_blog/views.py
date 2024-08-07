@@ -1,9 +1,11 @@
 # from email import message
 # from re import search
+from turtle import up, update
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
 from django.shortcuts import get_object_or_404
+from django.db.models import F, Q
 
 
 # page_alias - переменная, которая содержит алиас текущей страницы.
@@ -89,6 +91,19 @@ def post_detail(request, slug):
     # get_object_or_404- метод, который возвращает объект или 404
 
     post = get_object_or_404(Post, slug=slug)
+
+    # Проверяем, есть ли в сессии информация о просмотренных постах
+    if 'viewed_posts' not in request.session:
+        request.session['viewed_posts'] = []
+    
+    # Если пост еще не был просмотрен, увеличиваем количество просмотров
+    
+    if slug not in request.session['viewed_posts']:
+        post.views = F('views') + 1
+        post.save(update_fields=['views'])
+        request.session['viewed_posts'].append(slug)  # Добавляем пост в список просмотренных
+        request.session.modified = True  # Указываем, что сессия была изменена для сохранения изменений
+    
 
 
     context = {
