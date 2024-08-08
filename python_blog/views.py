@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from .models import Post
 from django.shortcuts import get_object_or_404
 from django.db.models import F, Q
+from django.db.models import Prefetch
 
 
 # page_alias - переменная, которая содержит алиас текущей страницы.
@@ -66,7 +67,13 @@ def blog(request):
     """
     
     if request.method == "GET":  # Проверка на гет-запрос
-        posts = Post.objects.all()
+
+        # Просто, но не оптимально
+        # posts = Post.objects.all()
+
+        # Говорим, чтобы при обращении к БД добылись сразу все теги и категории,
+        # за один запрос. А в целом также будет добыт весь экземпляр класса в переменную posts.
+        posts = Post.objects.prefetch_related("tags", "category").all()
       
         context = {
             "menu": menu,
@@ -90,7 +97,10 @@ def post_detail(request, slug):
     # И самый надежный
     # get_object_or_404- метод, который возвращает объект или 404
 
-    post = get_object_or_404(Post, slug=slug)
+    # post = get_object_or_404(Post, slug=slug)
+
+    # prefetch_related - позволяет сделать запрос к связанным объектам
+    post = Post.objects.prefetch_related("tags", "category").get(slug=slug)
 
     # Проверяем, есть ли в сессии информация о просмотренных постах
     if 'viewed_posts' not in request.session:
