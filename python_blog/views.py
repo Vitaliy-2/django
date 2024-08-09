@@ -1,12 +1,7 @@
-# from email import message
-# from re import search
-from turtle import up, update
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
-from django.shortcuts import get_object_or_404
 from django.db.models import F, Q
-from django.db.models import Prefetch
 
 
 # page_alias - переменная, которая содержит алиас текущей страницы.
@@ -73,7 +68,35 @@ def blog(request):
 
         # Говорим, чтобы при обращении к БД добылись сразу все теги и категории,
         # за один запрос. А в целом также будет добыт весь экземпляр класса в переменную posts.
-        posts = Post.objects.prefetch_related("tags", "category").all()
+        posts = Post.objects.prefetch_related("tags", "category").all().order_by("-published_date")
+        search = request.GET.get("search")
+        
+        # Если что-то есть в поиске, есть смысл его обрабатывать
+        if search:
+            search_in_title = request.GET.get("search_in_title")
+            search_in_text = request.GET.get("search_in_text")
+            search_in_tags = request.GET.get("search_in_tags")
+
+            # Формируем Q объект, который будем наполнять по мере активации чекбоксов
+            query = Q()
+
+            # Заменяю лукап icontains на iregex т.к. SQLite не приводит к регистру кирилицу.
+            # Обработка чекбокса поиска в заголовке
+            if search_in_title:
+                query |= Q(title__iregex=search)
+            # Обработка чекбокса поиска в тексте
+            if search_in_text:
+                query |= Q(text__iregex=search)
+            # Обработка чекбокса поиска в тегах
+            if search_in_tags:
+                query |= Q(tags__name__iregex=search)
+
+            # Если чекбоксы не активированы, ищем только по тексту поста
+            if not search_in_title and not search_in_text and not search_in_tags:
+                query = Q(text__iregex=search)
+
+            # Сортировка по дате публикации
+            posts = posts.filter(query).distinct()
       
         context = {
             "menu": menu,
