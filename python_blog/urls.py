@@ -1,7 +1,7 @@
 # python_blog/urls.py:
 # from django.contrib import admin
 from django.urls import path
-from .views import blog, post_detail, category_detail, tag_detail
+from .views import blog, post_detail, category_detail, tag_list
 
 # Подключено через include в конфигурационном пакете
 # все маршруты начинаются на blog/
@@ -17,5 +17,5 @@ urlpatterns = [
     # Маршрут с конвертером slug для отображения отдельной статьи
     path('<slug:slug>/', post_detail, name='post_detail'),
     path('category/<slug:slug>/', category_detail, name='category_detail'),
-    path('tag/<slug:slug>/', tag_detail, name='tag_detail'),
+    path('tag/<slug:slug>/', tag_list, name='tag_list'),
 ]

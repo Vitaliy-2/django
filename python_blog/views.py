@@ -169,11 +169,11 @@ def category_detail(request, slug):
     return render(request, "python_blog/blog.html", context)
 
 
-def tag_detail(request, slug):
+def tag_list(request, slug):
     """
     Функция - представление для страницы тега
     Принимает объект запроса HttpRequest и slug тега
-    Отображает список статей с соответствующим slug
+    Отображает список статей с соответствующим тегом
 
     Как это было бы на SQL (многие ко многим)
 
@@ -183,7 +183,7 @@ def tag_detail(request, slug):
         )
     )
     """
-    posts = Post.objects.filter(tags__slug=slug)
+    posts = Post.objects.prefetch_related("tags", "category").filter(tags__slug=slug)
     context = {
         "menu": menu,
         "posts": posts,

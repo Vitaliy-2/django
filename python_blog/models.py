@@ -71,12 +71,6 @@ class Category(models.Model):
         """
         return self.name
 
-    def get_absolute_url(self) -> str:
-        """
-        Метод для получения абсолютного URL поста по категории
-        """
-        return f'/blog/category/{self.slug}/'
-
 
 class Tag(models.Model):
     """
@@ -101,13 +95,6 @@ class Tag(models.Model):
         Строковое представление модели
         """
         return self.name
-
-    def get_absolute_url(self) -> str:
-        """
-        Метод для получения абсолютного URL поста по тегу
-        """
-
-        return f'/blog/tag/{self.slug}/'
 
 
 class Comment(models.Model):
