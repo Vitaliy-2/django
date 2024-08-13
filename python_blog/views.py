@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
 from django.db.models import F, Q
+from django.contrib.auth import get_user_model
+from django.views.decorators.cache import cache_page
 
 
 # page_alias - переменная, которая содержит алиас текущей страницы.
@@ -9,18 +11,9 @@ from django.db.models import F, Q
 # Нужно передать это значение через контекст в шаблон!!!
 
 menu = [
-    {
-        "name": "Главная",
-        "alias": "main"
-    },
-    {
-        "name": "Блог",
-        "alias": "blog"
-    },
-    {
-        "name": "О проекте",
-        "alias": "about"
-    }
+    {"name": "Главная", "alias": "main"},
+    {"name": "Блог", "alias": "blog"},
+    {"name": "О проекте", "alias": "about"}
 ]
 
 
@@ -38,14 +31,20 @@ def index(request) -> HttpResponse:
     return render(request, 'index.html', context)
 
 
+@cache_page(30)  # Кэширует страницу на 30 секунд
 def about(request):
     """
     Вьюшка для страницы "О проекте"
     """
+
+    user_model = get_user_model()
+    users_count = user_model.objects.count()
+
     context = {
         "menu": menu,
         "page_alias": "about",
-        "title": "О нас"
+        "title": "О нас",
+        "users_count": users_count,
     }
     return render(request, 'python_blog/about.html', context)
 

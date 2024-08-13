@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cache %}
 {% load markdown_to_html %}
 {% load static %}
 {% block title %}{{ post.title }}{% endblock %}
@@ -26,6 +27,8 @@
                 </div>
             </div>
             <div>
+                {% comment %} Кеш на 60 секунд {% endcomment %}
+                {% comment %} {% cache 60 post_tags %} {% endcomment %}
                 {% if post.tags.all %}
                     <div class="tags">
                         {% for tag in post.tags.all %}
@@ -34,6 +37,7 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                {% comment %} {% endcache %} {% endcomment %}
             </div>
         </div>
     </div>
